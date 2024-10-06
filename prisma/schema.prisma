@@ -1,0 +1,123 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model GymSplit {
+  id           Int            @id @default(autoincrement())
+  name         String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  GymSplitDays GymSplitDays[]
+  Journey      Journey[]
+}
+
+model GymSplitDays {
+  id                 Int                  @id @default(autoincrement())
+  day_name           String
+  split              String
+  gym_split_id       Int
+  gym_split          GymSplit             @relation(fields: [gym_split_id], references: [id], onDelete: Cascade)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  GymSplitDaysMuscle GymSplitDaysMuscle[]
+  WeekSplit          WeekSplit?           @relation(fields: [weekSplitId], references: [id])
+  weekSplitId        Int?
+}
+
+model GroupMuscle {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  GymSplitDaysMuscle GymSplitDaysMuscle[]
+}
+
+model GymSplitDaysMuscle {
+  id               Int          @id @default(autoincrement())
+  gym_split_day_id Int
+  gym_split_day    GymSplitDays @relation(fields: [gym_split_day_id], references: [id], onDelete: Cascade)
+  group_muscle_id  Int
+  group_muscle     GroupMuscle  @relation(fields: [group_muscle_id], references: [id], onDelete: Cascade)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model WeekSplit {
+  id           Int            @id @default(autoincrement())
+  monday       String?
+  tuesday      String?
+  wednesday    String?
+  thursday     String?
+  friday       String?
+  saturday     String?
+  sunday       String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  GymSplitDays GymSplitDays[]
+  Journey      Journey[]
+}
+
+model Progress {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  day        String
+  meditate   Boolean   @default(false)
+  praying    Boolean   @default(false)
+  gym        Boolean   @default(false)
+  reading    Boolean   @default(false)
+  water      Boolean   @default(false)
+  work       Boolean   @default(false)
+  journaling Boolean   @default(false)
+  diet       Boolean   @default(false)
+  user       User?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Journey    Journey[]
+}
+
+model Journal {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  day        String
+  spiritual  String
+  physical   String
+  mental     String
+  reflection String
+  user       User?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Journey    Journey[]
+}
+
+model Journey {
+  id            Int        @id @default(autoincrement())
+  gym_split_id  Int?
+  week_split_id Int?
+  gym_split     GymSplit?  @relation(fields: [gym_split_id], references: [id], onDelete: Cascade)
+  week_split    WeekSplit? @relation(fields: [week_split_id], references: [id], onDelete: Cascade)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  User          User[]
+  Progress      Progress?  @relation(fields: [progressId], references: [id])
+  progressId    Int?
+  Journal       Journal?   @relation(fields: [journalId], references: [id])
+  journalId     Int?
+}
+
+model User {
+  id         Int        @id @default(autoincrement())
+  username   String     @unique
+  email      String     @unique
+  password   String
+  journey_id Int
+  journey    Journey    @relation(fields: [journey_id], references: [id], onDelete: Cascade)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  Progress   Progress[]
+  Journal    Journal[]
+}

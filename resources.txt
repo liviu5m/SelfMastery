@@ -1,0 +1,149 @@
+BOOK API 
+https://www.googleapis.com/books/v1/volumes?q={TITLE}+subject:{CATEGORY}&key=AIzaSyCSP2MzFaX2VUT3Eeosn6nlMZJ86e4D7Uo
+
+GYM
+
+
+{
+  "2_days_per_week": {
+    "Day 1": {
+      "Split": "Upper Body",
+      "Muscle Groups": [
+        "Chest",
+        "Back",
+        "Shoulders",
+        "Biceps",
+        "Triceps"
+      ]
+    },
+    "Day 2": {
+      "Split": "Lower Body",
+      "Muscle Groups": [
+        "Legs",
+        "Glutes"
+      ]
+    }
+  },
+  "3_days_per_week": {
+    "Day 1": {
+      "Split": "Push",
+      "Muscle Groups": [
+        "Chest",
+        "Shoulders",
+        "Triceps"
+      ]
+    },
+    "Day 2": {
+      "Split": "Pull",
+      "Muscle Groups": [
+        "Back",
+        "Biceps"
+      ]
+    },
+    "Day 3": {
+      "Split": "Legs",
+      "Muscle Groups": [
+        "Legs",
+        "Glutes"
+      ]
+    }
+  },
+  "4_days_per_week": {
+    "Day 1": {
+      "Split": "Upper Body",
+      "Muscle Groups": [
+        "Chest",
+        "Back",
+        "Shoulders",
+        "Biceps",
+        "Triceps"
+      ]
+    },
+    "Day 2": {
+      "Split": "Lower Body",
+      "Muscle Groups": [
+        "Legs",
+        "Glutes"
+      ]
+    },
+    "Day 3": {
+      "Split": "Upper Body",
+      "Muscle Groups": [
+        "Chest",
+        "Back",
+        "Shoulders",
+        "Biceps",
+        "Triceps"
+      ]
+    },
+    "Day 4": {
+      "Split": "Lower Body",
+      "Muscle Groups": [
+        "Legs",
+        "Glutes"
+      ]
+    }
+  },
+  "5_days_per_week": {
+    "Day 1": {
+      "Split": "Push",
+      "Muscle Groups": [
+        "Chest",
+        "Shoulders",
+        "Triceps"
+      ]
+    },
+    "Day 2": {
+      "Split": "Pull",
+      "Muscle Groups": [
+        "Back",
+        "Biceps"
+      ]
+    },
+    "Day 3": {
+      "Split": "Legs",
+      "Muscle Groups": [
+        "Legs",
+        "Glutes"
+      ]
+    },
+    "Day 4": {
+      "Split": "Upper Body",
+      "Muscle Groups": [
+        "Chest",
+        "Back",
+        "Shoulders",
+        "Biceps",
+        "Triceps"
+      ]
+    },
+    "Day 5": {
+      "Split": "Lower Body",
+      "Muscle Groups": [
+        "Legs",
+        "Glutes"
+      ]
+    }
+  }
+}
+
+https://exercisedb.p.rapidapi.com/exercises/bodyPart/{MUSCLE}?rapidapi-key=e021cc096emsh82b5756aaff39d9p1a2c55jsn19e62f8fddc8
+
+FOOD CALORY
+
+const response = await fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+    method: 'POST',
+    headers: {
+      'x-app-id': 'b0280e8f',
+      'x-app-key': '4de7b900727b9d7ba53d24cbdf7538d8',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ query: foodItem })
+  });
+
+
+RECIPE FINDER 
+
+https://www.themealdb.com/api/json/v1/1/search.php?s={MEAL}
+
+
